@@ -10,8 +10,7 @@ class SearchBar extends React.Component {
       location: '',
       sortBy: 'best_match',
       results: 20,
-      radius: 0,
-      datalist: []
+      radius: 0
     };
 
     this.handleTermChange = this.handleTermChange.bind(this);
@@ -59,8 +58,6 @@ class SearchBar extends React.Component {
 
   handleTermChange(event) {
     this.setState({ term: event.target.value });
-    Autocomplete.complete(this.state.term);
-    this.setState({ datalist: Autocomplete.complete(this.state.term) });
   }
 
   handleLocationChange(event) {
