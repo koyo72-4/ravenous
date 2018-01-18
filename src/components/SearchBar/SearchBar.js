@@ -49,17 +49,19 @@ class SearchBar extends React.Component {
   }
 
   handleSortByChange(sortByOption) {
-    this.setState({ sortBy: sortByOption });
-    if (this.state.term && this.state.location) {
-      this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
-    }
+    this.setState({ sortBy: sortByOption }, function() {
+      if (this.state.term && this.state.location) {
+        this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
+      }
+    });
   }
 
   handleResultChange(resultOption) {
-    this.setState({ results: resultOption });
-    if (this.state.term && this.state.location) {
-      this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
-    }
+    this.setState({ results: resultOption }, function() {
+      if (this.state.term && this.state.location) {
+        this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
+      }
+    });
   }
 
   handleTermChange(event) {
