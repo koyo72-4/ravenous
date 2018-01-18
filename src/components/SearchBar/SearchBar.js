@@ -1,5 +1,6 @@
 import React from 'react';
 import './SearchBar.css';
+import Autocomplete from '../../util/Autocomplete';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class SearchBar extends React.Component {
       location: '',
       sortBy: 'best_match',
       results: 20,
-      radius: 0
+      radius: 0,
+      datalist: []
     };
 
     this.handleTermChange = this.handleTermChange.bind(this);
@@ -65,7 +67,9 @@ class SearchBar extends React.Component {
   }
 
   handleTermChange(event) {
-    this.setState({ term: event.target.value });
+    this.setState({ term: event.target.value }, function() {
+      this.setState({ datalist: Autocomplete.complete(this.state.term) });
+    });
   }
 
   handleLocationChange(event) {
@@ -129,11 +133,16 @@ class SearchBar extends React.Component {
           <input
             placeholder="Search Businesses"
             onChange={this.handleTermChange}
+            onKeyPress={this.handleKeyPress}
             list="suggestions" />
           <input
             placeholder="Where?"
             onChange={this.handleLocationChange}
+            onKeyPress={this.handleKeyPress}
             list="suggestions" />
+          <datalist id="suggestions">
+            {this.state.datalist}
+          </datalist>
         </div>
         <div className="SearchBar-submit">
           <select
@@ -145,8 +154,7 @@ class SearchBar extends React.Component {
             <option value={40000}>40000 meters (24.9 miles)</option>
           </select>
           <a
-            onClick={this.handleSearch}
-            onKeyPress={this.handleKeyPress}>
+            onClick={this.handleSearch}>
             Let&rsquo;s Go
           </a>
           <div className="Number-results">
