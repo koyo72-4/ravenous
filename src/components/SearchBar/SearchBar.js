@@ -1,6 +1,5 @@
 import React from 'react';
 import './SearchBar.css';
-import Autocomplete from '../../util/Autocomplete';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -16,6 +15,7 @@ class SearchBar extends React.Component {
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
     this.handleRadiusChange = this.handleRadiusChange.bind(this);
+    this.handleKeyPress= this.handleKeyPress.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
 
     this.sortByOptions = {
@@ -50,10 +50,16 @@ class SearchBar extends React.Component {
 
   handleSortByChange(sortByOption) {
     this.setState({ sortBy: sortByOption });
+    if (this.state.term && this.state.location) {
+      this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
+    }
   }
 
   handleResultChange(resultOption) {
     this.setState({ results: resultOption });
+    if (this.state.term && this.state.location) {
+      this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
+    }
   }
 
   handleTermChange(event) {
@@ -62,12 +68,18 @@ class SearchBar extends React.Component {
 
   handleLocationChange(event) {
     this.setState({ location: event.target.value });
-    Autocomplete.complete(this.state.location);
-    this.setState({ datalist: Autocomplete.complete(this.state.location) });
   }
 
   handleRadiusChange(event) {
     this.setState({ radius: event.target.value });
+  }
+
+  handleKeyPress(event) {
+    if (event.charCode === 13) {
+      if (this.state.term && this.state.location) {
+        this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
+      }
+    }
   }
 
   handleSearch(event) {
@@ -120,9 +132,6 @@ class SearchBar extends React.Component {
             placeholder="Where?"
             onChange={this.handleLocationChange}
             list="suggestions" />
-          <datalist id="suggestions">
-            {this.state.datalist}
-          </datalist>
         </div>
         <div className="SearchBar-submit">
           <select
@@ -134,7 +143,8 @@ class SearchBar extends React.Component {
             <option value={40000}>40000 meters (24.9 miles)</option>
           </select>
           <a
-            onClick={this.handleSearch}>
+            onClick={this.handleSearch}
+            onKeyPress={this.handleKeyPress}>
             Let&rsquo;s Go
           </a>
           <div className="Number-results">
