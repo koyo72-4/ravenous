@@ -1,6 +1,5 @@
 import React from 'react';
 import './SearchBar.css';
-import Autocomplete from '../../util/Autocomplete';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -10,8 +9,7 @@ class SearchBar extends React.Component {
       location: '',
       sortBy: 'best_match',
       results: 20,
-      radius: 0,
-      datalist: []
+      radius: 0
     };
 
     this.handleTermChange = this.handleTermChange.bind(this);
@@ -68,7 +66,7 @@ class SearchBar extends React.Component {
 
   handleTermChange(event) {
     this.setState({ term: event.target.value }, function() {
-      this.setState({ datalist: Autocomplete.complete(this.state.term) });
+      this.props.complete(this.state.term);
     });
   }
 
@@ -89,8 +87,10 @@ class SearchBar extends React.Component {
   }
 
   handleSearch(event) {
-    this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
-    event.preventDefault();
+    if (this.state.term && this.state.location) {
+      this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy, this.state.results, this.state.radius);
+      event.preventDefault();
+    }
   }
 
   renderSortByOptions() {
@@ -141,7 +141,13 @@ class SearchBar extends React.Component {
             onKeyPress={this.handleKeyPress}
             list="suggestions" />
           <datalist id="suggestions">
-            {this.state.datalist}
+            {
+              this.props.datalist.map(term => {
+                return (
+                  <option value={term.text} />
+                );
+              })
+            }
           </datalist>
         </div>
         <div className="SearchBar-submit">

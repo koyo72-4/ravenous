@@ -1,4 +1,3 @@
-import React from 'react';
 import apiKey from './Secrets';
 
 const Autocomplete = {
@@ -7,11 +6,7 @@ const Autocomplete = {
       headers: { Authorization: `Bearer ${apiKey}` }
     }).then(response => response.json()).then(jsonResponse => {
       console.log(jsonResponse.terms);
-      return jsonResponse.terms.map(term => {
-        return (
-          <option value={term.text} />
-        );
-      });
+      return jsonResponse.terms;
     });
   }
 };
