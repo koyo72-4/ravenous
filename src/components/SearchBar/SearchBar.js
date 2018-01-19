@@ -66,6 +66,7 @@ class SearchBar extends React.Component {
 
   handleTermChange(event) {
     this.setState({ term: event.target.value }, function() {
+      console.log(this.state.term);
       this.props.complete(this.state.term);
     });
   }
@@ -138,8 +139,7 @@ class SearchBar extends React.Component {
           <input
             placeholder="Where?"
             onChange={this.handleLocationChange}
-            onKeyPress={this.handleKeyPress}
-            list="suggestions" />
+            onKeyPress={this.handleKeyPress} />
           <datalist id="suggestions">
             {
               this.props.datalist.map(text => {
@@ -151,19 +151,23 @@ class SearchBar extends React.Component {
           </datalist>
         </div>
         <div className="SearchBar-submit">
-          <select
-            id="Radius"
-            onChange={this.handleRadiusChange}>
-            <option value={0}>Specify a search radius</option>
-            <option value={10000}>10000 meters (6.2 miles)</option>
-            <option value={25000}>25000 meters (15.5 miles)</option>
-            <option value={40000}>40000 meters (24.9 miles)</option>
-          </select>
-          <a
-            onClick={this.handleSearch}>
-            Let&rsquo;s Go
-          </a>
-          <div className="Number-results">
+          <div className="select-radius">
+            <select
+              id="Radius"
+              onChange={this.handleRadiusChange}>
+              <option value={0}>Specify a search radius</option>
+              <option value={10000}>10000 meters (6.2 miles)</option>
+              <option value={25000}>25000 meters (15.5 miles)</option>
+              <option value={40000}>40000 meters (24.9 miles)</option>
+            </select>
+          </div>
+          <div className="submit-button">
+            <a
+              onClick={this.handleSearch}>
+              Let&rsquo;s Go
+            </a>
+          </div>
+          <div className="number-results">
             <ul>
               {this.renderResultOptions()}
             </ul>

@@ -56,8 +56,33 @@
 }
 
 .SearchBar-submit {
-  text-align: center;
   width: 100%;
+  display: flex;
+}
+
+.select-radius {
+  width: 40%;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.submit-button {
+  width: 20%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.number-results {
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.select-radius select {
+  height: 1.25rem;
+  margin-right: 20px;
 }
 
 .SearchBar-submit a {
@@ -66,9 +91,7 @@
   background-color: #cca353;
   color: #ffffff;
   font-weight: 600;
-  margin-left: 27%;
   transition: background-color .5s;
-  margin-right: 15px;
 }
 
 .SearchBar-submit a:hover {
@@ -76,34 +99,45 @@
   background-color: #a7874b;
 }
 
-.Number-results {
-  width: 25%;
+.number-results {
   color: white;
-  font-size: 14px;
-  display: inline-block;
+  font-size: 15px;
 }
 
-.Number-results ul {
-  display: inline-block;
+.number-results ul {
+  display: inline-flex;
+  justify-content: flex-start;
 }
 
-.Number-results ul li {
-  display: inline-block;
+.number-results ul li {
   margin-right: 10px;
 }
 
-.Number-results ul li:hover {
+.number-results ul li:hover {
   color: #d4cfcf;
   cursor: pointer;
 }
 
-.Number-results ul li.active {
+.number-results ul li.active {
   color: #f0c36c;
 }
 
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: 982px) {
+  .select-radius {
+    justify-content: center;
+  }
+  .select-radius select {
+    margin: 0;
+  }
+  .number-results {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 682px) {
   .SearchBar {
     background-image: url('./background_search_mobile.jpg');
+    background-position: 70% 0%;
   }
 
   .SearchBar-sort-options ul {
@@ -111,13 +145,38 @@
     margin-right: 2rem;
   }
 
+  .SearchBar-sort-options ul li {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
   .SearchBar-fields {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 25px;
   }
 
   .SearchBar-fields input {
     margin-right: 0;
     margin-bottom: .86rem;
+  }
+
+  .SearchBar-submit {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .select-radius, .submit-button, .number-results {
+    margin-bottom: 25px;
+    width: 100%;
+  }
+
+  .submit-button a {
+
+  }
+
+  .number-results ul li {
+    font-size: 14.5px;
+    margin-right: 30px;
   }
 }
