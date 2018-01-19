@@ -23,9 +23,12 @@ class App extends React.Component {
   }
 
   complete(letters) {
+    console.log(Autocomplete.complete(letters));
+    /*
     Autocomplete.complete(letters).then(text => {
       this.setState({ datalist: text });
     });
+    */
   }
 
   render() {
