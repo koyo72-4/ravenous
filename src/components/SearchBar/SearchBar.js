@@ -142,9 +142,9 @@ class SearchBar extends React.Component {
             list="suggestions" />
           <datalist id="suggestions">
             {
-              this.props.datalist.map(term => {
+              this.props.datalist.map(text => {
                 return (
-                  <option value={term.text} />
+                  <option value={text} />
                 );
               })
             }
