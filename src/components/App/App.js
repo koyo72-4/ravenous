@@ -3,23 +3,7 @@ import './App.css';
 import BusinessList from '../BusinessList/BusinessList';
 import SearchBar from '../SearchBar/SearchBar';
 import Yelp from '../../util/Yelp';
-//import Autocomplete from '../../util/Autocomplete';
-
-import apiKey from '../../util/Secrets';
-/*
-const Autocomplete = {
-  complete(letters) {
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${letters}`, {
-      headers: { Authorization: `Bearer ${apiKey}` }
-    }).then(response => {return response.json();}).then(jsonResponse => {
-      if (jsonResponse.terms) {
-        console.log(jsonResponse.terms);
-        return jsonResponse.terms.map(term => term.text);
-      }
-    });
-  }
-};
-*/
+import Autocomplete from '../../util/Autocomplete';
 
 class App extends React.Component {
   constructor(props) {
@@ -39,23 +23,10 @@ class App extends React.Component {
   }
 
   complete(letters) {
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${letters}`, {
-      headers: { Authorization: `Bearer ${apiKey}` }
-    }).then(response => {return response.json();}).then(jsonResponse => {
-      if (jsonResponse.terms) {
-        console.log(jsonResponse.terms);
-        return jsonResponse.terms.map(term => term.text);
-      }
-    }).then(text => {
-      console.log(text);
-      this.setState({ datalist: text });
-    });
-    /*
     Autocomplete.complete(letters).then(text => {
       console.log(text);
       this.setState({ datalist: text });
     });
-    */
   }
 
   render() {

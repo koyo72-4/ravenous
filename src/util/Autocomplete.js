@@ -1,9 +1,8 @@
-/*
 import apiKey from './Secrets';
 
 const Autocomplete = {
   complete(letters) {
-    fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${letters}`, {
+    return fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/autocomplete?text=${letters}`, {
       headers: { Authorization: `Bearer ${apiKey}` }
     }).then(response => {return response.json();}).then(jsonResponse => {
       if (jsonResponse.terms) {
@@ -15,4 +14,3 @@ const Autocomplete = {
 };
 
 export default Autocomplete;
-*/
