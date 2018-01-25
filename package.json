@@ -13,6 +13,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "surge ./public --domain katie-ravenous.surge.sh/"
+    "deploy": "surge ./public --domain http://katiekatieravenousravenous1234.surge.sh/"
   }
 }
