@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://dependent-ducks.surge.sh/",
   "dependencies": {
+    "merge": "^1.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "^2.0.4",
